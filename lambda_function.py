@@ -11,7 +11,7 @@ base_url_search = "http://www.worldcat.org/webservices/catalog/search/worldcat/o
 base_url_location = "http://www.worldcat.org/webservices/catalog/content/libraries/"
 
 # the AWS Lambda handler function
-def handler(event, context):
+def lambda_handler(event, context):
     if event["session"]["new"]:
         on_session_started({"requestId": event["request"]["requestId"]}, event["session"])
     if event["request"]["type"] == "LaunchRequest":
