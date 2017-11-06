@@ -1,6 +1,18 @@
 # alexa-worldcat-poc
 A proof-of-concept service that allows you to search WorldCat using an Amazon Echo.
 
+Demo: [https://youtu.be/6Byuih0vfs4](https://youtu.be/6Byuih0vfs4)
+
+Sample voice interaction:
+
+User: Alexa, launch WorldCat.
+Alexa: Ask me to find a book for you. For example, you can say, "Where can I find 'On the Road'?"
+User: Where can I find "On the Road"?
+Alexa: The closest library where you can find "On the Road" by Kerouac, Jack is Worthington Libraries. Do you need the library's address?
+User: Yes.
+Alexa: I've sent the address to your device.
+Card displays on device: Worthington Libraries / 820 High Street, Worthington, OH, 43085, United States
+
 ## Setup Part 1 - AWS Lambda
 
 1. Create or sign in to your [AWS account](https://console.aws.amazon.com/console/home).
@@ -39,3 +51,113 @@ zip_code = ""
 6. Interaction Model:
 	1. Intent Schema: copy and paste the contents of [intent_schema.json](speech_assets/intent_schema.json).
 	2. Sample Utterances: copy and paste the contents of [utterances](speech_assets/utterances).
+	3. Leave all the other default options.
+	4. Save > Next
+7. Configuration:
+	1. Service Endpoint Type:
+		1. Select "AWS Lambda ARN"
+		2. Copy and paste your AWS Lambda ARN (Step 11, above) into the text box.
+	2. Leave all the other default options.
+	3. Save > Next
+
+## Test
+
+1. Test your Skill using the Voice Simulator or the Service Simulator in the Developer Console.
+2. For example, entering the text "Where can I find Hillbilly Elegy?" in the Service Simulator will produce a request and response like the following:
+
+Request:
+```json
+{
+  "session": {
+    "new": true,
+    "sessionId": "SessionId.d85d7912...",
+    "application": {
+      "applicationId": "amzn1.ask.skill.59520a35..."
+    },
+    "attributes": {},
+    "user": {
+      "userId": "amzn1.ask.account.AGHBSX2S..."
+    }
+  },
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "EdwRequestId.d5048246-...",
+    "intent": {
+      "name": "SearchIntent",
+      "slots": {
+        "Search": {
+          "name": "Search",
+          "value": "hillbilly elegy"
+        }
+      }
+    },
+    "locale": "en-US",
+    "timestamp": "2017-11-06T21:00:12Z"
+  },
+  "context": {
+    "AudioPlayer": {
+      "playerActivity": "IDLE"
+    },
+    "System": {
+      "application": {
+        "applicationId": "amzn1.ask.skill..."
+      },
+      "user": {
+        "userId": "amzn1.ask.account.AGHBSX2SX..."
+      },
+      "device": {
+        "supportedInterfaces": {}
+      }
+    }
+  },
+  "version": "1.0"
+}
+```
+
+Response:
+```json
+{
+  "version": "1.0",
+  "response": {
+    "outputSpeech": {
+      "text": "The closest library where you can find Hillbilly elegy by Vance, J. D., author. is Worthington Libraries.\n\nDo you need the library's address?",
+      "type": "PlainText"
+    },
+    "card": {
+      "content": "The closest library where you can find Hillbilly elegy by Vance, J. D., author. is Worthington Libraries.\n\nDo you need the library's address?",
+      "title": "Ask WorldCat"
+    },
+    "reprompt": {
+      "outputSpeech": {
+        "text": "",
+        "type": "PlainText"
+      }
+    },
+    "speechletResponse": {
+      "outputSpeech": {
+        "text": "The closest library where you can find Hillbilly elegy by Vance, J. D., author. is Worthington Libraries.\n\nDo you need the library's address?"
+      },
+      "card": {
+        "content": "The closest library where you can find Hillbilly elegy by Vance, J. D., author. is Worthington Libraries.\n\nDo you need the library's address?",
+        "title": "Ask WorldCat"
+      },
+      "reprompt": {
+        "outputSpeech": {
+          "text": ""
+        }
+      },
+      "shouldEndSession": false
+    }
+  },
+  "sessionAttributes": {
+    "author": "Vance, J. D., author.",
+    "closest_library_address": "820 High Street, Worthington, OH, 43085, United States",
+    "closest_library_name": "Worthington Libraries",
+    "title": "Hillbilly elegy"
+  }
+}
+```
+
+You can also copy and paste any requests from the Service Simulator into AWS Lambda as test events. This allows you to quickly run the tests against your code as you make changes.
+
+If you have an Echo device associated with your Amazon account, you can use it to test your Skill too.
