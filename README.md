@@ -5,13 +5,14 @@ Demo: [https://youtu.be/6Byuih0vfs4](https://youtu.be/6Byuih0vfs4)
 
 Sample voice interaction:
 
-User: Alexa, launch WorldCat.
-Alexa: Ask me to find a book for you. For example, you can say, "Where can I find 'On the Road'?"
-User: Where can I find "On the Road"?
-Alexa: The closest library where you can find "On the Road" by Kerouac, Jack is Worthington Libraries. Do you need the library's address?
-User: Yes.
-Alexa: I've sent the address to your device.
-Card displays on device: Worthington Libraries / 820 High Street, Worthington, OH, 43085, United States
+* User: Alexa, launch WorldCat.
+* Alexa: Ask me to find a book for you. For example, you can say, "Where can I find 'On the Road'?"
+* User: Where can I find "On the Road"?
+* Alexa: The closest library where you can find "On the Road" by Kerouac, Jack is Worthington Libraries. Do you need the library's address?
+* User: Yes.
+* Alexa: I've sent the address to your device.
+* Card displays on Amazon Alexa app and/or Echo device
+	* Worthington Libraries / 820 High Street, Worthington, OH, 43085, United States
 
 ## Setup Part 1 - AWS Lambda
 
